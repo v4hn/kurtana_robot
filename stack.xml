@@ -1,0 +1,9 @@
+<stack>
+  <description brief="kurtana_robot">kurtana_robot</description>
+  <author>Maintained by Martin Günther, Henning Deeken</author>
+  <license>GPL</license>  
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/kurtana_robot</url>
+  <depend stack="ros" />
+
+</stack>
