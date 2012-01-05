@@ -51,7 +51,7 @@ class JointStatePublisher():
                 else:
                     zeroval = 0
 
-                joint = {'min':minval, 'max':maxval, 'zero':zeroval, 'value':zeroval, 'velocity':0}
+                joint = {'min':minval, 'max':maxval, 'zero':zeroval, 'position':zeroval, 'velocity':0}
                 self.free_joints[name] = joint
                 self.joint_list.append(name)
 
@@ -75,12 +75,13 @@ class JointStatePublisher():
     def source_cb(self, msg):
         for i in range(len(msg.name)):
             name = msg.name[i]
-            position = msg.position[i]
-            velocity = msg.velocity[i]
             if name in self.free_joints:
                 joint = self.free_joints[name]
-                joint['value'] = position
-                joint['velocity'] = velocity
+                joint['position'] = msg.position[i]
+                if len(msg.velocity) > i:
+                    joint['velocity'] = msg.velocity[i]
+                else:
+                    joint['velocity'] = 0.0
             if self.gui is not None:
 			self.gui.update_sliders()
 
@@ -97,13 +98,13 @@ class JointStatePublisher():
             # Add Free Joints
             for (name,joint) in self.free_joints.items():
                 msg.name.append(str(name))
-                msg.position.append(joint['value'])
+                msg.position.append(joint['position'])
                 msg.velocity.append(joint['velocity'])
 
             # Add Dependent Joints
             for (name,param) in self.dependent_joints.items():
                 parent = param['parent']
-                baseval = self.free_joints[parent]['value']
+                baseval = self.free_joints[parent]['position']
                 value = baseval * param.get('factor', 1)
 
                 msg.name.append(str(name))
@@ -167,15 +168,15 @@ class JointStatePublisherGui(wx.Frame):
             purevalue = joint_info['slidervalue']
             joint = joint_info['joint']
             value = self.sliderToValue(purevalue, joint)
-            joint['value'] = value
+            joint['position'] = value
         self.update_sliders()
 
     def update_sliders(self):
         for (name,joint_info) in self.joint_map.items():
             joint = joint_info['joint']
-            joint_info['slidervalue'] = self.valueToSlider(joint['value'], joint)
+            joint_info['slidervalue'] = self.valueToSlider(joint['position'], joint)
             joint_info['slider'].SetValue(joint_info['slidervalue'])
-            joint_info['display'].SetValue("%.2f"%joint['value'])
+            joint_info['display'].SetValue("%.2f"%joint['position'])
 
     def center_event(self, event):
         self.center()
