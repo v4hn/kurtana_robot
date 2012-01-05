@@ -1,5 +1,12 @@
 <?xml version="1.0"?>
 <launch>
+  <param name="katana_type" type="string" value="katana_450_6m90a" />
+
+  <!-- load kurtana urdf -->
+  <include file="$(find kurt_description)/launch/upload_kurtana.launch" />
+
+  <!-- which joints does this katana instance control? -->
+  <rosparam command="load" file="$(find katana)/config/katana_arm_controllers.yaml" />
 
   <!-- katana node -->
   <node pkg="katana" type="katana" name="katana" output="screen">
@@ -13,23 +20,22 @@
     <remap from="grasp_query_name" to="/gripper_grasp_status" />
   </node>
 
-  <!-- which joints does this katana instance control? -->
-  <rosparam command="load" file="$(find katana)/config/katana_arm_controllers.yaml" />
-
-  <!-- load kurtana urdf -->
-  <include file="$(find kurt_description)/launch/upload_kurtana.launch" />
-
   <!-- start kurtana_joint_state_publisher with gui to adjust the rack configuration manually -->
   <!-- node publishes on kurtana_joint_states -->
   <node pkg="kurtana_joint_state_publisher" type="kurtana_joint_state_publisher" name="kurtana_joint_state_publisher">
-	<param name="use_kurtana_gui" value="true"/>
-	<remap from="joint_states" to="kurtana_joint_states" />
+    <param name="use_kurtana_gui" value="true"/>
+    <remap from="joint_states" to="kurtana_joint_states" />
+  </node>
+
+  <!-- publish fake wheel joint states (to run on real robot, replace by kurt_base) -->
+  <node pkg="kurt_base" type="fake_wheel_publisher.py" name="fake_wheel_publisher">
+    <remap from="joint_states" to="wheel_joint_states" />
   </node>
 
   <!-- start the joint_state_publisher to merge the joint_states from the rack and the arm -->
-  <rosparam param="source_list">[kurtana_joint_states, katana_joint_states]</rosparam>
-  <node pkg="kurtana_joint_state_publisher" type="joint_state_publisher" name="joint_state_publisher">
-	<param name="use_gui" value="false"/>
+  <rosparam param="source_list">[kurtana_joint_states, katana_joint_states, wheel_joint_states]</rosparam>
+  <node pkg="kurtana_joint_state_publisher" type="joint_state_publisher" name="joint_state_publisher" output="screen">
+    <param name="use_gui" value="false"/>
   </node>
 
   <!-- start the robot state publisher -->
