@@ -2,13 +2,9 @@
 
 import roslib; roslib.load_manifest('kurtana_joint_state_publisher')
 import rospy
-import wx
 from sensor_msgs.msg import JointState
 from urdf_python.urdf import URDF
 from math import pi
-from threading import Thread
-
-RANGE = 10000
 
 def get_param(name, value=None):
     private = "~%s" % name
@@ -59,16 +55,6 @@ class JointStateMuxer():
             self.free_joints[name] = joint
             self.joint_list.append(name)
 
-        use_gui = get_param("use_gui", False)
-
-        if use_gui:
-            app = wx.App()
-            self.gui = JointStateMuxerGui("Joint State Publisher Adapted", self)
-            self.gui.Show()
-            Thread(target=app.MainLoop).start()
-        else:
-            self.gui = None
-
         source_list = get_param("source_list", [])
         self.sources = []
         for source in source_list:
@@ -86,12 +72,10 @@ class JointStateMuxer():
                     joint['velocity'] = msg.velocity[i]
                 else:
                     joint['velocity'] = 0.0
-        if self.gui is not None:
-            self.gui.update_sliders()
 
 
     def loop(self):
-        hz = get_param("rate", 10) # 10hz
+        hz = get_param("rate", 50) # 50 Hz
         r = rospy.Rate(hz)
 
         # Publish Joint States
@@ -100,13 +84,13 @@ class JointStateMuxer():
             msg.header.stamp = rospy.Time.now()
 
             # Add Free Joints
-            for (name,joint) in self.free_joints.items():
+            for (name, joint) in self.free_joints.items():
                 msg.name.append(str(name))
                 msg.position.append(joint['position'])
                 msg.velocity.append(joint['velocity'])
 
             # Add Dependent Joints
-            for (name,param) in self.dependent_joints.items():
+            for (name, param) in self.dependent_joints.items():
                 parent = param['parent']
                 baseval = self.free_joints[parent]['position']
                 value = baseval * param.get('factor', 1)
@@ -119,96 +103,11 @@ class JointStateMuxer():
 
             r.sleep()
 
-class JointStateMuxerGui(wx.Frame):
-    def __init__(self, title, jsp):
-        wx.Frame.__init__(self, None, -1, title, (-1, -1));
-        self.jsp = jsp
-        self.joint_map = {}
-        panel = wx.Panel(self, wx.ID_ANY);
-        box = wx.BoxSizer(wx.VERTICAL)
-        font = wx.Font(9, wx.SWISS, wx.NORMAL, wx.BOLD)
-
-        ### Sliders ###
-        for name in self.jsp.joint_list:
-            joint = self.jsp.free_joints[name]
-
-            if joint['min'] == joint['max']:
-                continue
-
-            row = wx.GridSizer(1,2)
-            label = wx.StaticText(panel, -1, name)
-            label.SetFont(font)
-            row.Add(label, 1, wx.ALIGN_CENTER_VERTICAL)
-
-            display = wx.TextCtrl (panel, value=str(0),
-                        style=wx.TE_READONLY | wx.ALIGN_RIGHT)
-
-            row.Add(display, flag= wx.ALIGN_RIGHT| wx.ALIGN_CENTER_VERTICAL)
-            box.Add(row, 1, wx.EXPAND)
-            slider = wx.Slider(panel, -1, RANGE/2, 0, RANGE,
-                        style= wx.SL_AUTOTICKS | wx.SL_HORIZONTAL)
-            slider.SetFont(font)
-            box.Add(slider, 1, wx.EXPAND)
-
-            self.joint_map[name] = {'slidervalue':0, 'display':display,
-                                    'slider':slider, 'joint':joint}
-
-        ### Buttons ###
-        self.ctrbutton = wx.Button(panel, 1, 'Center')
-        self.Bind(wx.EVT_SLIDER, self.sliderUpdate)
-
-        wx.EVT_BUTTON(self, 1, self.center_event)
-
-        box.Add(self.ctrbutton, 0, wx.EXPAND)
-
-        panel.SetSizer(box)
-        self.center()
-        box.Fit(self)
-        self.update_values()
-
-
-    def update_values(self):
-        for (name,joint_info) in self.joint_map.items():
-            purevalue = joint_info['slidervalue']
-            joint = joint_info['joint']
-            value = self.sliderToValue(purevalue, joint)
-            joint['position'] = value
-        self.update_sliders()
-
-    def update_sliders(self):
-        for (name,joint_info) in self.joint_map.items():
-            joint = joint_info['joint']
-            joint_info['slidervalue'] = self.valueToSlider(joint['position'], joint)
-            joint_info['slider'].SetValue(joint_info['slidervalue'])
-            joint_info['display'].SetValue("%.2f"%joint['position'])
-
-    def center_event(self, event):
-        self.center()
-
-    def center(self):
-        rospy.loginfo("Centering")
-        for (name,joint_info) in self.joint_map.items():
-            joint = joint_info['joint']
-            joint_info['slidervalue'] = self.valueToSlider(joint['zero'], joint)
-        self.update_values()
-
-    def sliderUpdate(self, event):
-        for (name,joint_info) in self.joint_map.items():
-            joint_info['slidervalue'] = joint_info['slider'].GetValue()
-        self.update_values()
-
-    def valueToSlider(self, value, joint):
-        return (value - joint['min']) * float(RANGE) / (joint['max'] - joint['min'])
-
-    def sliderToValue(self, slider, joint):
-        pctvalue = slider / float(RANGE)
-        return joint['min'] + (joint['max']-joint['min']) * pctvalue
-
-
 if __name__ == '__main__':
     try:
         rospy.init_node('joint_state_publisher')
         jsp = JointStateMuxer()
         jsp.loop()
 
-    except rospy.ROSInterruptException: pass
+    except rospy.ROSInterruptException:
+        pass
