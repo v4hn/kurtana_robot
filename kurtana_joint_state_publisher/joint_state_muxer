@@ -19,7 +19,7 @@ def get_param(name, value=None):
     else:
         return value
 
-class JointStatePublisher():
+class JointStateMuxer():
     def __init__(self):
         description = get_param('robot_description')
         robot = xml.dom.minidom.parseString(description).getElementsByTagName('robot')[0]
@@ -59,7 +59,7 @@ class JointStatePublisher():
 
         if use_gui:
             app = wx.App()
-            self.gui = JointStatePublisherGui("Joint State Publisher Adapted", self)
+            self.gui = JointStateMuxerGui("Joint State Publisher Adapted", self)
             self.gui.Show()
             Thread(target=app.MainLoop).start()
         else:
@@ -115,7 +115,7 @@ class JointStatePublisher():
 
             r.sleep()
 
-class JointStatePublisherGui(wx.Frame):
+class JointStateMuxerGui(wx.Frame):
     def __init__(self, title, jsp):
         wx.Frame.__init__(self, None, -1, title, (-1, -1));
         self.jsp = jsp
@@ -204,7 +204,7 @@ class JointStatePublisherGui(wx.Frame):
 if __name__ == '__main__':
     try:
         rospy.init_node('joint_state_publisher')
-        jsp = JointStatePublisher()
+        jsp = JointStateMuxer()
         jsp.loop()
 
     except rospy.ROSInterruptException: pass

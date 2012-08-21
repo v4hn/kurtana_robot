@@ -32,9 +32,9 @@
     <remap from="joint_states" to="wheel_joint_states" />
   </node>
 
-  <!-- start the joint_state_publisher to merge the joint_states from the rack and the arm -->
+  <!-- start the joint_state_muxer to merge the joint_states from the rack and the arm -->
   <rosparam param="source_list">[kurtana_joint_states, katana_joint_states, wheel_joint_states]</rosparam>
-  <node pkg="kurtana_joint_state_publisher" type="joint_state_publisher" name="joint_state_publisher" output="screen">
+  <node pkg="kurtana_joint_state_publisher" type="joint_state_muxer" name="joint_state_muxer" output="screen">
     <param name="use_gui" value="false"/>
   </node>
 
