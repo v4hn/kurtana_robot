@@ -82,8 +82,8 @@ class JointStateMuxer():
                     joint['velocity'] = msg.velocity[i]
                 else:
                     joint['velocity'] = 0.0
-            if self.gui is not None:
-			self.gui.update_sliders()
+        if self.gui is not None:
+            self.gui.update_sliders()
 
 
     def loop(self):
