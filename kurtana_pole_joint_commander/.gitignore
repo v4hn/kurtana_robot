@@ -1,0 +1,7 @@
+cfg/JointCommander.cfgc
+cfg/cpp/kurtana_pole_joint_commander/JointCommanderConfig.h
+docs/JointCommanderConfig-usage.dox
+docs/JointCommanderConfig.dox
+docs/JointCommanderConfig.wikidoc
+src/kurtana_pole_joint_commander/cfg/JointCommanderConfig.py
+src/kurtana_pole_joint_commander/cfg/__init__.py
