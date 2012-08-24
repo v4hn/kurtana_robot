@@ -20,10 +20,15 @@
     <remap from="grasp_query_name" to="/gripper_grasp_status" />
   </node>
 
-  <!-- start kurtana_joint_state_publisher with gui to adjust the rack configuration manually -->
+  <!-- joint_commander: use dynamic_reconfigure to adjust the rack configuration manually -->
   <!-- node publishes on kurtana_joint_states -->
-  <node pkg="kurtana_joint_state_publisher" type="kurtana_joint_state_publisher" name="kurtana_joint_state_publisher">
-    <param name="use_kurtana_gui" value="true"/>
+  <node name="joint_commander" pkg="kurtana_pole_joint_commander" type="joint_commander">
+    <param name="kurtana_stretch_joint" type="double" value="0.2" />
+    <param name="kurtana_roll_joint" type="double" value="0.0" />
+    <param name="kurtana_pitch_joint" type="double" value="0.6" />
+
+    <param name="publish_joint_states" type="bool" value="True" />
+
     <remap from="joint_states" to="kurtana_joint_states" />
   </node>
 
@@ -38,6 +43,5 @@
 
   <!-- start the robot state publisher -->
   <node pkg="robot_state_publisher" type="state_publisher" name="robot_state_publisher" />
-
 </launch>
 
