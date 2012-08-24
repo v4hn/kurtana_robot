@@ -1,0 +1,16 @@
+<package>
+  <description brief="kurtana_gazebo">
+
+     kurtana_gazebo
+
+  </description>
+  <author>Martin Günther</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/kurtana_gazebo</url>
+  
+  <depend package="katana_arm_gazebo"/>
+
+</package>
+
+

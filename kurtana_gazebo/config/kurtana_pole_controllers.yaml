@@ -1,0 +1,22 @@
+kurtana_stretch_joint_controller:
+  type: "robot_mechanism_controllers/JointPositionController"
+  joint: "kurtana_stretch_joint"
+  pid:
+    p: 1000.0
+    i: 0.0
+    d: 500.0
+kurtana_roll_joint_controller:
+  type: "robot_mechanism_controllers/JointPositionController"
+  joint: "kurtana_roll_joint"
+  pid:
+    p: 2.0
+    i: 0.1
+    d: 0.4
+kurtana_pitch_joint_controller:
+  type: "robot_mechanism_controllers/JointPositionController"
+  joint: "kurtana_pitch_joint"
+  pid:
+    p: 2.0
+    i: 0.1
+    d: 0.4
+
