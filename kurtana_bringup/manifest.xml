@@ -1,0 +1,14 @@
+<package>
+  <description brief="kurtana_bringup">
+
+     kurtana_bringup
+
+  </description>
+  <author>Martin Günther</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/kurtana_bringup</url>
+
+</package>
+
+
