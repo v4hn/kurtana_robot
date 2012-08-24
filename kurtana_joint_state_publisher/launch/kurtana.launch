@@ -39,7 +39,7 @@
 
   <!-- start the joint_state_muxer to merge the joint_states from the rack and the arm -->
   <rosparam param="source_list">[kurtana_joint_states, katana_joint_states, wheel_joint_states]</rosparam>
-  <node pkg="kurtana_joint_state_publisher" type="joint_state_muxer" name="joint_state_muxer" output="screen" />
+  <node pkg="joint_state_muxer" type="joint_state_muxer" name="joint_state_muxer" output="screen" />
 
   <!-- start the robot state publisher -->
   <node pkg="robot_state_publisher" type="state_publisher" name="robot_state_publisher" />
