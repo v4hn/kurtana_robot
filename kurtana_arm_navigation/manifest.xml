@@ -15,6 +15,7 @@
   <depend package="trajectory_filter_server"/>
   <depend package="constraint_aware_spline_smoother"/>
   <depend package="move_arm"/>
+  <depend package="katana_trajectory_filter"/>
 
 </package>
 
