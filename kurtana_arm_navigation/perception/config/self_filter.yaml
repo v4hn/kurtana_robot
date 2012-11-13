@@ -24,4 +24,6 @@ self_see_links:
     padding: 0.02
   - name: katana_r_finger_link
     padding: 0.02
-  
+  - name: kurtana_baseplate_link
+  - name: laser
+ 
