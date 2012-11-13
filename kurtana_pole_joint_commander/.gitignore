@@ -5,3 +5,4 @@ docs/JointCommanderConfig.dox
 docs/JointCommanderConfig.wikidoc
 src/kurtana_pole_joint_commander/cfg/JointCommanderConfig.py
 src/kurtana_pole_joint_commander/cfg/__init__.py
+src/kurtana_pole_joint_commander/__init__.py
