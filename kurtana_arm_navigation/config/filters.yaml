@@ -7,10 +7,7 @@ filter_chain:
    -
     name: cubic_spline_short_cutter_smoother
     type: CubicSplineShortCutterFilterJointTrajectoryWithConstraints
-    params: {discretization: 0.30}
-    # If discretization is set too high, too many trajectory segments will be
-    # generated (the Katana can only process ~16 or so).
-    #
+    params: {discretization: 0.01}
     # Discretization does NOT mean time discretization any more!
     # Instead, the new meaning of this parameter is that a new trajectory point
     # is added whenever "max_diff > discretization", where
@@ -19,3 +16,6 @@ filter_chain:
    -
     name: katana_trajectory_filter
     type: katana_trajectory_filter/KatanaTrajectoryFilterFilterJointTrajectoryWithConstraints
+   - 
+    name: clamped_cubic_spline_smoother
+    type: ClampedCubicSplineSmootherFilterJointTrajectoryWithConstraints
