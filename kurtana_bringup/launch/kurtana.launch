@@ -23,9 +23,9 @@
   <!-- joint_commander: use dynamic_reconfigure to adjust the rack configuration manually -->
   <!-- node publishes on kurtana_joint_states -->
   <node name="joint_commander" pkg="kurtana_pole_joint_commander" type="joint_commander">
-    <param name="kurtana_stretch_joint" type="double" value="0.2" />
-    <param name="kurtana_roll_joint" type="double" value="0.0" />
-    <param name="kurtana_pitch_joint" type="double" value="0.6" />
+    <param name="kurtana_stretch_joint" type="double" value="0.422" />
+    <param name="kurtana_roll_joint" type="double" value="0.02" />
+    <param name="kurtana_pitch_joint" type="double" value="1.31" />
 
     <param name="publish_joint_states" type="bool" value="True" />
 
@@ -43,5 +43,12 @@
 
   <!-- start the robot state publisher -->
   <node pkg="robot_state_publisher" type="state_publisher" name="robot_state_publisher" />
+
+  <!-- Kinect driver -->
+  <include file="$(find openni_launch)/launch/openni.launch">
+    <arg name="camera" value="kinect" />
+    <arg name="publish_tf" value="false" />
+    <arg name="depth_registration" value="true" />
+  </include>
 </launch>
 
