@@ -4,7 +4,7 @@
   <node pkg="planning_environment" name="wall_clock_server" type="fake_time.py" />
 
   <param name="warehouse_host" value="localhost"/>
-  <param name="warehouse_port" value="27020"/>
+  <param name="warehouse_port" value="27017"/>
   <node name="mongo" type="wrapper.py" pkg="mongodb">
     <param name="overwrite" value="false"/>
     <param name="database_path" value="arm_navigation_dbs/kurtana"/>
@@ -65,6 +65,7 @@
   <param name="right_interpolate_service_name" value="none" />
   <!-- Called to smooth and optimize a planner trajectory -->
   <param name="trajectory_filter_service_name" value="/trajectory_filter_server/filter_trajectory_with_constraints" />
+  <param name="trajectory_filter_2_service_name" value="/trajectory_filter_server2/filter_trajectory_with_constraints" />
   <!-- Called to get the proximity space -->
   <param name="proximity_space_service_name" value="none" />
   <!-- Called to get collision validity of robot state -->
