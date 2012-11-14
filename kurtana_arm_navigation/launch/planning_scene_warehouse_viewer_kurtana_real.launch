@@ -9,10 +9,12 @@
     <param name="database_path" value="arm_navigation_dbs/kurtana_real"/>
   </node>
 
+  <include file="$(find kurtana_arm_navigation)/perception/launch/kinect_perception.launch" />
   <include file="$(find planning_environment)/launch/environment_server.launch">
     <arg name="use_monitor" value="true" />
-    <arg name="use_collision_map" value="false" />
+    <arg name="use_collision_map" value="true" />
   </include>
+
   <include file="$(find kurtana_arm_navigation)/launch/constraint_aware_kinematics.launch" />
   <include file="$(find kurtana_arm_navigation)/launch/ompl_planning.launch" />
   <include file="$(find kurtana_arm_navigation)/launch/trajectory_filter_server.launch" />
