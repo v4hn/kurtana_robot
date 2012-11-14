@@ -57,7 +57,7 @@
   <!-- Called to plan trajectories given motion plan requests -->
   <param name="planner_service_name" value="/ompl_planning/plan_kinematic_path" />
   <!-- Interpolates between end effector positions for the left arm -->
-  <param name="left_interpolate_service_name" value="none" />
+  <param name="left_interpolate_service_name" value="/interpolated_ik_motion_plan" />
   <!-- Interpolates between end effector positions for the right arm -->
   <param name="right_interpolate_service_name" value="none" />
   <!-- Called to smooth and optimize a planner trajectory -->
