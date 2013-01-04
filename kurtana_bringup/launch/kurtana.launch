@@ -25,7 +25,7 @@
   <node name="joint_commander" pkg="kurtana_pole_joint_commander" type="joint_commander">
     <param name="kurtana_stretch_joint" type="double" value="0.422" />
     <param name="kurtana_roll_joint" type="double" value="0.02" />
-    <param name="kurtana_pitch_joint" type="double" value="1.31" />
+    <param name="kurtana_pitch_joint" type="double" value="1.29" />
 
     <param name="publish_joint_states" type="bool" value="True" />
 
