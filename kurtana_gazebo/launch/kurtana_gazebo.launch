@@ -11,7 +11,8 @@
   <remap from="grasp_query_name" to="/gripper_grasp_status" />
 
   <!-- load world -->
-  <include file="$(find katana_arm_gazebo)/launch/grasp_world.launch" />
+  <!-- start up empty world -->
+  <include file="$(find gazebo_worlds)/launch/empty_world_throttled.launch"/>
 
   <!-- push robot_description to factory and spawn robot in gazebo -->
   <!-- <node name="spawn_katana_model" pkg="gazebo" type="spawn_model" args="$(optenv ROBOT_INITIAL_POSE) -z 0.01 -unpause -urdf -param robot_description -model katana" respawn="false" output="screen"/> -->
@@ -45,6 +46,12 @@
   <include file="$(find katana_arm_gazebo)/launch/cylinder_object.launch"/>
   -->
   <include file="$(find katana_arm_gazebo)/launch/coke_can.launch"/>
+
+  <!-- spawn table -->
+  <param name="table_description"
+    command="$(find xacro)/xacro.py '$(find katana_arm_gazebo)/urdf/table.urdf.xacro'" />
+  <node name="spawn_table" pkg="gazebo" type="spawn_model" args="-urdf -param table_description -model table_1 -x 0.75"
+    respawn="false" output="screen" />
 
   <group ns="katana_arm_controller">
     <node pkg="katana_joint_movement_adapter" type="joint_movement_adapter" name="joint_movement_adapter" output="screen">
