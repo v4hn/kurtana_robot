@@ -26,4 +26,5 @@ self_see_links:
     padding: 0.02
   - name: kurtana_baseplate_link
   - name: laser
- 
+  - name: kurtana_pole_link
+  - name: kurtana_innerpole_stretch_link
