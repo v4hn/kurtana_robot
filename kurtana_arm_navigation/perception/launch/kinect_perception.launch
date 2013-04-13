@@ -30,11 +30,11 @@
   </node>
 
   <!-- attached_object filter kinect points -->
-  <node pkg="planning_environment" type="filter_attached_objects" name="filter_attached_objects_kinect" output="screen">
+  <!-- <node pkg="planning_environment" type="filter_attached_objects" name="filter_attached_objects_kinect" output="screen">
     <remap from="cloud_in" to="/$(arg kinect_camera_name)/depth_registered/points_filtered" />
     <remap from="cloud_out" to="/$(arg kinect_camera_name)/depth_registered/points_filtered_attached" />
     <param name="sensor_frame" type="string" value="$(arg kinect_frame_prefix)" />
-  </node>
+  </node> -->
 
   <node pkg="collider" type="collider_node" name="collider_node" respawn="true" output="screen">
      <param name="fixed_frame" type="string" value="base_footprint" />

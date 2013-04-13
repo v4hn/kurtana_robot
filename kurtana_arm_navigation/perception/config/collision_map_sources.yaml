@@ -1,5 +1,5 @@
 cloud_sources:
-  - name: /kinect/depth_registered/points_filtered_attached
+  - name: /kinect/depth_registered/points_filtered
     # take every nth frame (1 is no discards)
     frame_subsample: 1
     # take every nth point from the frames you do process
