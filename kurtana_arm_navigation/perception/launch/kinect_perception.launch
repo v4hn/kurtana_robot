@@ -11,7 +11,7 @@
   <include file="$(find kurtana_arm_navigation)/launch/kurtana_planning_environment.launch" />
 
   <!-- self filter kinect point cloud -->
-  <node pkg="robot_self_filter" type="self_filter" respawn="true" name="self_filter" output="screen">
+  <node pkg="robot_self_filter_color" type="self_filter_color" respawn="true" name="self_filter" output="screen">
 
     <!-- The topic for the input cloud -->
     <remap from="cloud_in" to="/$(arg kinect_camera_name)/depth_registered/points" />
