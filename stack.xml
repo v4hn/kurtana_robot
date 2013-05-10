@@ -1,6 +1,14 @@
 <stack>
-  <description brief="kurtana_robot">kurtana_robot</description>
-  <author>Maintained by Martin Günther, Henning Deeken</author>
+  <description brief="kurtana_robot">
+    This stack contains packages for the Kurtana robot. Specifically:
+    <ul>
+      <li>configuration files for the arm_navigation pipeline: kinematics, motion planning, trajectory filtering, collision map (package kurtana_arm_navigation)</li>
+      <li>launch files to bring up the physical Kurtana (package kurtana_bringup)</li>
+      <li>launch files to bring up the Kurtana in Gazebo (package kurtana_gazebo)</li>
+      <li>a node to publish the joint states of the Kinect pole (package kurtana_pole_joint_commander)</li>
+    </ul>
+  </description>
+  <author>Maintained by Martin Günther</author>
   <license>GPL</license>  
   <review status="unreviewed" notes=""/>
   <url>http://ros.org/wiki/kurtana_robot</url>
