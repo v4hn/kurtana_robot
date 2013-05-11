@@ -1,0 +1,8 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: ""
+    relative_path: /home/martin/ros-groovy/kurt/uos-ros-pkg/kurt_driver/kurt_description/robots/kurtana.urdf
+  SRDF:
+    relative_path: config/kurtana.srdf
+  CONFIG:
+    generated_timestamp: 1368276903
