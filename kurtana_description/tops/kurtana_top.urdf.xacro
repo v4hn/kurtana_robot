@@ -22,7 +22,7 @@
   <!-- *** Microsoft Kinect *** -->
   <!-- ************************ -->
   
-  <include filename="$(find kurt_description)/parts/kinect.urdf.xacro" />
+  <include filename="$(find uos_common_urdf)/urdf/kinect.urdf.xacro" />
   <xacro:kinect camera="kinect" />
 
   <joint name="kurtana_kinect_joint" type="fixed">
