@@ -1,4 +1,4 @@
 <launch>
-    <include file="$(find kurt_description)/launch/upload_kurtana.launch" />
+    <include file="$(find kurtana_description)/launch/upload_kurtana.launch" />
     <rosparam command="load" ns="robot_description_planning" file="$(find kurtana_arm_navigation)/config/kurtana_planning_description.yaml" />
 </launch>

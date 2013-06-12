@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <launch>
   <!-- load katana urdf -->
-  <include file="$(find kurt_description)/launch/upload_kurtana.launch" />
+  <include file="$(find kurtana_description)/launch/upload_kurtana.launch" />
 
   <!-- which joints does this katana instance control? (for teleop etc.) -->
   <rosparam command="load" file="$(find katana)/config/katana_arm_controllers.yaml" />
