@@ -51,7 +51,7 @@
   <!-- Degree of freedom representing inverse kinematics redundancy on the right arm -->
   <param name="right_redundancy" value="none" />
   <!-- Link on the left arm to perform inverse kinematics for -->
-  <param name="left_ik_link" value="katana_motor5_wrist_roll_link" />
+  <param name="left_ik_link" value="katana_gripper_tool_frame" />
   <!-- Link on the right arm to perform inverse kinematics for -->
   <param name="right_ik_link" value="none" />
   <!-- Called to plan trajectories given motion plan requests -->

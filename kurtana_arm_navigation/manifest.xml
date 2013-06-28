@@ -16,6 +16,7 @@
   <depend package="constraint_aware_spline_smoother"/>
   <depend package="move_arm"/>
   <depend package="katana_trajectory_filter"/>
+  <depend package="katana_ikfast_kinematics_plugin"/>
 
 </package>
 
