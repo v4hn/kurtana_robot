@@ -3,7 +3,7 @@
   <arg name="load_robot_description" default="false"/>
 
   <!-- Load universal robotic description format (URDF) -->
-  <include if="$(arg load_robot_description)" file="$(find kurt_description)/launch/upload_kurtana.launch" />
+  <include if="$(arg load_robot_description)" file="$(find kurtana_description)/launch/upload_kurtana.launch" />
 
   <!-- The semantic description that corresponds to the URDF -->
   <param name="robot_description_semantic" textfile="$(find kurtana_moveit_config)/config/kurtana.srdf" />
