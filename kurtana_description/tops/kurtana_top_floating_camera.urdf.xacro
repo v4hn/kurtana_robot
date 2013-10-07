@@ -12,7 +12,7 @@
   <!-- *** KURTana Rack *** -->
   <!-- ******************** -->
 
-  <include filename="$(find kurtana_description)/parts/kurtana_rack.urdf.xacro" />
+  <xacro:include filename="$(find kurtana_description)/parts/kurtana_rack.urdf.xacro" />
 
   <property name="kinect_x_offset" value="0.018" />
   <property name="kinect_z_offset" value="0.087" />
@@ -22,7 +22,7 @@
   <!-- *** SICK TiM3xx laser *** -->
   <!-- ************************* -->
 
-  <include filename="$(find sick_tim3xx)/urdf/sick_tim3xx.urdf.xacro" />
+  <xacro:include filename="$(find sick_tim3xx)/urdf/sick_tim3xx.urdf.xacro" />
   <xacro:sick_tim3xx laser_link="laser" />
 
   <joint name="kurtana_laser_joint" type="fixed">
@@ -36,7 +36,7 @@
   <!-- *** Neuronics Katana Arm *** -->
   <!-- **************************** -->
 
-  <include filename="$(find katana_description)/urdf/katana_450_6m90a_with_controlbox.urdf.xacro" />
+  <xacro:include filename="$(find katana_description)/urdf/katana_450_6m90a_with_controlbox.urdf.xacro" />
 
   <link name="katana_pattern"></link>
   <joint name="katana_pattern_joint" type="fixed">

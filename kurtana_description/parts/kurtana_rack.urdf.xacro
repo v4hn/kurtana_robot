@@ -6,7 +6,7 @@
   xmlns:xacro="http://ros.org/wiki/xacro"
   name="kurtana_rack">
 
-  <include filename="$(find uos_common_urdf)/common.xacro" />
+  <xacro:include filename="$(find uos_common_urdf)/common.xacro" />
 
   <property name="rackplate_length" value="0.47" />
   <property name="rackplate_width" value="0.368" />
